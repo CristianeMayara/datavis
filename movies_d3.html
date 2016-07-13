@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ordenação de Dados</title>
+    <link rel="stylesheet" href="css/styles_movies_d3.css">
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+</head>
+
+<body>
+    <!-- COMPARATOR        - ID -->
+    <!-- compareByGrossing - 0 -->
+    <!-- compareByBudget   - 1 -->
+    <!-- compareByProfit   - 2 -->
+    
+    <center><h2>Ordenação dos Filmes Por Bilheteria</h2></center>
+    <div id="grossing_chart"></div> <br><br>
+    <center><h2>Ordenação dos Filmes Por Orçamento</h2></center>
+    <div id="budget_chart"></div> <br><br>
+    <center><h2>Ordenação dos Filmes Por Lucro</h2></center>
+    <div id="profit_chart"></div>
+    
+    <script type="text/javascript">
+        function render(data, comparator, comparatorid) {
+            var chartid = getChartId(comparatorid);
+            var classid = getClassId(comparatorid);
+            
+            d3.select(chartid).selectAll("div."+classid)
+                    .data(data)
+                .enter().append("div")
+                .attr("class", classid)
+                .append("span");
+            
+            d3.select(chartid).selectAll("div."+classid)
+                    .data(data)
+                .exit().remove();
+            
+            d3.select(chartid).selectAll("div."+classid)
+                    .data(data)
+                .attr("class", classid)
+                .style("width", function (d) {
+                    switch(comparatorid) {
+                        case 0:
+                            return (d.Worldwide_Gross_M*1) + "px";
+                        case 1:
+                            return (d.Budget_M*1) + "px";
+                        case 2:
+                            return ((d.Worldwide_Gross_M-d.Budget_M)*1) + "px";
+                    }
+                })
+                .select("span")
+                    .text(function (d) {
+                        return d.Film;
+                    });
+             if(comparator)
+                d3.select("body")
+                    .selectAll("div."+classid) 
+                    .sort(comparator);
+        }
+        
+        function getChartId(comparatorid) {
+            switch(comparatorid) {
+                case 0:
+                    return "#grossing_chart";
+                case 1:
+                    return "#budget_chart";
+                case 2:
+                    return "#profit_chart";
+            }
+        }
+        
+        function getClassId(comparatorid) {
+            switch(comparatorid) {
+                case 0:
+                    return "grossing-bar";
+                case 1:
+                    return "budget-bar";
+                case 2:
+                    return "profit-bar";
+            }
+        }
+        
+        var compareByGrossing = function (a, b) {
+            return a.Worldwide_Gross_M > b.Worldwide_Gross_M?-1:1;
+        };
+        var compareByBudget = function (a, b) {
+            return a.Budget_M > b.Budget_M?-1:1;
+        };
+        var compareByProfit = function (a, b) {
+            return (a.Worldwide_Gross_M-a.Budget_M) > (b.Worldwide_Gross_M-b.Budget_M)?-1:1;
+        };
+        
+        d3.json("movies.json", function(error, json){
+            render(json, compareByGrossing, 0);
+            render(json, compareByBudget, 1);
+            render(json, compareByProfit, 2);
+        });
+    </script>
+</body>
+</html>

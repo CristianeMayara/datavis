@@ -1,0 +1,38 @@
+body {
+    font-family: "helvetica"
+}
+
+.grossing-bar {
+    min-height: 15px;
+    min-width: 10px;
+    background-color: #DC143C;
+    margin-bottom: 2px;
+    font-size: 11px;
+    color: #f0f8ff;
+    text-align: right;
+    padding-right: 2px;
+}
+
+.budget-bar {
+    min-height: 15px;
+    min-width: 10px;
+    background-color: #8B008B;
+    margin-bottom: 2px;
+    font-size: 11px;
+    color: #f0f8ff;
+    text-align: right;
+    padding-right: 2px;
+}
+
+.profit-bar {
+    min-height: 15px;
+    min-width: 10px;
+    background-color: #4B0082;
+    margin-bottom: 2px;
+    font-size: 11px;
+    color: #f0f8ff;
+    text-align: right;
+    padding-right: 2px;
+}
+
+
