@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Bolsa Google em Area </title>
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script src="http://code.highcharts.com/modules/data.js"></script>
+        
+        <script language="JavaScript">
+        $(document).ready(function() {
+            $.get('googl.csv', function(csv) {
+                $('#container').highcharts({
+                    chart: {
+                        zoomType: 'x',
+                        type: 'area'
+                    },
+                    data: {
+                        csv: csv
+                    },
+                    title: {
+                        text: 'Valor do papel da GOOGL na Bolsa de Valores'
+                    },
+                    subtitle: {
+                        text: document.ontouchstart === undefined ?
+                        'Click and drag in the plot area to zoom in' :
+                        'Pinch the chart to zoom in'
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Valores diarios'
+                        }
+                    },
+                    plotOptions: {
+                          area: {
+                             fillColor: {
+                                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1},
+                                stops: [
+                                   [0, Highcharts.getOptions().colors[0]],
+                                   [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                                ]
+                             },
+                             marker: {
+                                radius: 2
+                             },
+                             lineWidth: 1,
+                             states: {
+                                hover: {
+                                   lineWidth: 1
+                                }
+                             },
+                             threshold: null
+                          }
+                   }
+                });
+            });
+            
+            
+        });
+        </script>
+		
+    </head>
+    <body>
+        <div id="container" style="width: 800px; height: 400px; margin: 0 auto"></div>
+    </body>
+</html>
