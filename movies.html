@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title> Valores por Filme - Highcharts </title>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script>
+        $(function () {
+            $('#container').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Arrecadação nas Bilheterias de Filmes em Alguns Países'
+                },
+                subtitle: {
+                    text: 'Fonte: <a href="http://www.boxofficemojo.com/">BoxOfficeMojo.com</a>'
+                },
+                xAxis: {
+                    categories: ['Avengers: Age of Ultron', 'Guardians of the Galaxy', 'Batman v Superman: Dawn of Justice', 'Captain America: Civil War', 'Alice Through the Looking Glass']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Valor arrecadado (US$) corrigido pela inflação'
+                    }
+                },
+                series: [{
+                    name: 'Mundialmente',
+                    data: [1405413868,773312399,872662631,1145271622,237906730]
+                }, {
+                    name: 'EUA',
+                    data: [459005868,333176600,330360194,401614622,70557730]
+                },
+                {
+                    name: 'Brasil',
+                    data: [47862465,16820519,37566828,40510761,8789260]
+                },
+                {
+                    name: 'Australia',
+                    data: [30969152,23291983,22517365,25698720,6254959]
+                }],
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                }
+            });
+            
+            $('#container2').highcharts({
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Arrecadação nas Bilheterias na Semana de Estreia'
+                },
+                subtitle: {
+                    text: 'Fonte: <a href="http://www.boxofficemojo.com/">BoxOfficeMojo.com</a>'
+                },
+                xAxis: {
+                    categories: ['Sexta', 'Sábado', 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Valor arrecadado (US$) corrigido pela inflação'
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: false
+                        },
+                        enableMouseTracking: true
+                    }
+                },
+                series: [{
+                    name: 'Avengers: Age of Ultron',
+                    data: [84424532, 56526635, 50319942, 13228555, 13132812, 9409838,
+8613154]
+                },{
+                    name: 'Guardians of the Galaxy',
+                    data: [37845336, 30989857, 25485690, 11722356, 11907821, 8808382, 7631397]
+                },{
+                    name: 'Batman v Superman: Dawn of Justice',
+                    data: [81558505, 50657088, 33791754, 15040496, 12180163, 8102420, 7742367]
+                },{
+                    name: 'Captain America: Civil War',
+                    data: [75502161, 61209001, 42427980, 13291876, 13761120, 8976371, 8160569]
+                },{
+                    name: 'Alice Through the Looking Glass',
+                    data: [9701973, 9048495, 8108258, 6648895, 2767479, 1952585, 1853912]
+                }]
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="container" style="width:100%; height:400px;"></div>
+    <div id="container2" style="width:100%; height:400px;"></div>
+</body>
+</html>
